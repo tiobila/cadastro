@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Cadastro</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 0px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: stretch;
+            max-width: 700px; /* Adjusted max-width */
+            width: calc(100% - 50px); /* Subtract 50px padding on each side */
+        }
+        
+
+        .left-section,
+        .right-section {
+            flex: 1;
+            max-width: 300px;
+            margin: 10px;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        .gender-section {
+            display: flex;
+            margin-top: 10px;
+        }
+
+        .gender-option {
+            margin-right: 20px;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+            width: calc(100% - 20px);
+            /* Subtract 20px to leave 10px padding on each side */
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        /* Additional styles for better alignment */
+        .left-section {
+            align-self: flex-start;
+     
+        }
+
+        .right-section {
+            align-self: flex-end;
+        }
+
+        h2 {
+            color: #4caf50; /* Green color for the heading */
+            border-bottom: 2px solid #4caf50; /* Green line below the heading */
+            padding-bottom: 10px; /* Space between heading and form */
+            margin-bottom: 20px; /* Space below the heading */
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="img">
+        <img src="/transferir.jpg" alt=""  height="581">
+    </div>
+    <div class="container">
+        <div class="left-section">
+            <h2>Cadastre-se</h2>
+            <form id="cadastroForm" name="contact" method="POST" data-netlify="true">
+                <input type="hidden" name="subject" 
+                value="Sales inquiry from mysitename.netlify.app" />
+                <input type="hidden" name="bot-field" />
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" placeholder="ex: paulo" required>
+
+                <label for="dataNascimento">Data de Nascimento:</label>
+                <input type="date" id="dataNascimento" required>
+
+                <label>Curso:</label>
+                <select id="curso" required>
+                    <option value="informatica">Informática</option>
+                    <option value="gastronomia">Gastronomia</option>
+                </select>
+
+                <label>Turma:</label>
+                <select id="turma" required>
+                    <option value="prosub1">Prosub 1</option>
+                    <option value="prosub2">Prosub 2</option>
+                    <option value="prosub3">Prosub 3</option>
+                </select>
+            </div>
+
+            <div class="right-section">
+                <label for="email">E-mail:</label>
+                <input type="email" id="email" placeholder="ex: pedro12@gmail.com" required>
+
+                <label for="endereco">Endereço:</label>
+                <input type="text" id="endereco" placeholder="ex: rua lucia sena ">
+
+                <label for="senha">Senha:</label>
+                <input type="text" id="senha" placeholder="ex: carlos1234" required>
+
+                <label for="telefoneResponsavel">Telefone do Responsável:</label>
+                <input type="tel" id="telefoneResponsavel" placeholder="ex: (75) 99124-3806" required>
+            </div>
+
+            <div style="width: 100%;">
+                <label>Gênero:</label>
+                <div class="gender-section">
+                    <div class="gender-option">
+                        <input type="radio" name="genero" value="masculino" id="masculino" required>
+                        <label for="masculino">Masculino</label>
+                    </div>
+
+                    <div class="gender-option">
+                        <input type="radio" name="genero" value="feminino" id="feminino" required>
+                        <label for="feminino">Feminino</label>
+                    </div>
+
+                    <div class="gender-option">
+                        <input type="radio" name="genero" value="outro" id="outro" required>
+                        <label for="outro">Outro</label>
+                    </div>
+
+                    <div class="gender-option">
+                        <input type="radio" name="genero" value="prefiroNaoDizer" id="prefiroNaoDizer" required>
+                        <label for="prefiroNaoDizer">Prefiro não dizer</label>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit">Cadastrar</button>
+        </form>
+    </div>
+    <script>
+         function cadastrar() {
+        // Get form values
+        var nome = document.getElementById("nome").value;
+        var dataNascimento = document.getElementById("dataNascimento").value;
+        var curso = document.getElementById("curso").value;
+        var turma = document.getElementById("turma").value;
+        var email = document.getElementById("email").value;
+        var endereco = document.getElementById("endereco").value;
+        var senha = document.getElementById("senha").value;
+        var telefoneResponsavel = document.getElementById("telefoneResponsavel").value;
+
+        // Get selected gender
+        var generoOptions = document.getElementsByName("genero");
+        var genero = "";
+        for (var i = 0; i < generoOptions.length; i++) {
+            if (generoOptions[i].checked) {
+                genero = generoOptions[i].value;
+                break;
+            }
+        }
+
+        // Check if any field is empty
+        if (
+            nome === "" ||
+            dataNascimento === "" ||
+            curso === "" ||
+            turma === "" ||
+            email === "" ||
+            endereco === "" ||
+            senha === "" ||
+            telefoneResponsavel === "" ||
+            genero === ""
+        ) {
+            alert("Por favor, preencha todos os campos.");
+        } else {
+            // All fields are filled, show success message
+            alert("Cadastro realizado com sucesso!");
+        }
+    }
+
+    </script>
+</body>
+</html>
